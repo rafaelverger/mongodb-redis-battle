@@ -45,7 +45,7 @@ systems({
   },
 
   'mongodb': {
-    image: { docker: "dockerfile/mongodb" },
+    image: { dockerfile: "containers/mongodb/Dockerfile" },
     command: 'mongod',
     scalable: false,
     ports: {
