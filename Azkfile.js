@@ -15,7 +15,7 @@ systems({
     ],
     workdir: "/azk/#{manifest.dir}",
     shell: "/bin/bash",
-    command: "node index.js",
+    command: "node battle.js",
     wait: false,
     mounts: {
       '/azk/#{manifest.dir}': path("."),
@@ -30,7 +30,7 @@ systems({
   },
 
   'redis': {
-    image: { docker: "dockerfile/redis" },
+    image: { docker: "dockerfiles/redis" },
     scalable: false,
     ports: {
       data: "6379:6379/tcp",
@@ -47,6 +47,7 @@ systems({
   'mongodb': {
     image: { dockerfile: "containers/mongodb/Dockerfile" },
     command: 'mongod',
+    wait: {"retry": 30, "timeout": 2000},
     scalable: false,
     ports: {
       data: "27017:27017/tcp",
