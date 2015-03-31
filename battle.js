@@ -4,6 +4,7 @@ var rediscli = require('./redis-cli')
   , results = {};
 
 function track_cli_method(client, method, num_elements, callback) {
+  console.log(method + ' for ' + client.name + ' for ' + num_elements + ' elements');
   results[method] = results[method] || {};
   results[method][num_elements] = results[method][num_elements] || {}
 
@@ -22,8 +23,8 @@ function run_test(client, ec_idx, callback) {
       start = new Date();
       track_cli_method(client, 'write', element_counts[ec_idx], function(){
         track_cli_method(client, 'read', element_counts[ec_idx], function(){
-          if (ec_idx < element_counts.length) {
-            return run_test(client, ++ec_idx, callback);
+          if (++ec_idx < element_counts.length) {
+            return run_test(client, ec_idx, callback);
           }
           callback();
         });
@@ -36,7 +37,7 @@ console.log('Init test');
 run_test(rediscli, 0, function(){
   rediscli.clear();
   run_test(mongocli, 0, function(){
-    mongocli.clear();
     console.log('Test is finished. Results:\n' + JSON.stringify(results, null, 2));
+    mongocli.clear();
   });
 })
