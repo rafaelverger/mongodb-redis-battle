@@ -46,7 +46,7 @@ systems({
 
   'mongodb': {
     image: { dockerfile: "containers/mongodb/Dockerfile" },
-    command: 'mongod',
+    command: 'mongod --config /etc/mongod.yaml',
     wait: {"retry": 30, "timeout": 2000},
     scalable: false,
     ports: {
