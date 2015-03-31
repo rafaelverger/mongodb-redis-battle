@@ -52,9 +52,9 @@ systems({
     ports: {
       data: "27017:27017/tcp",
     },
-    mounts: {
-      '/data/db' : persistent('mongodb'),
-    },
+    // mounts: {
+    //   '/data/db' : persistent('mongodb'),
+    // },
     export_envs: {
       MONGO_URI: "mongodb://#{net.host}:#{net.port[27017]}/mrb",
     },
