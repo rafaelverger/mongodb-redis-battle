@@ -1,0 +1,15 @@
+systemLog:
+  destination: file
+  path: "/var/log/mongodb/mongodb.log"
+  logAppend: true
+storage:
+  engine: "wiredTiger"
+  dbPath: "/data/db"
+  wiredTiger:
+    engineConfig:
+      cacheSizeGB: 8
+    collectionConfig:
+      blockCompressor: snappy
+net:
+  bindIp: 127.0.0.1
+  port: 27017

@@ -32,6 +32,8 @@ RUN set -x \
 	&& rm -rf /var/lib/mongodb \
 	&& mv /etc/mongod.conf /etc/mongod.conf.orig
 
+ADD ./mongod.yaml /etc/mongod.yaml
+
 RUN mkdir -p /data/db && chown -R mongodb:mongodb /data/db
 VOLUME /data/db
 
